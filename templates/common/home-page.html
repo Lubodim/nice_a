@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <div class="container">
+        <div class="col-9">
+
+            <!-- Start Searchbar Form -->
+            <div class="nav-links">
+                <ul class="nav-group">
+                    <li class="nav-item">
+
+                        <!-- Link to Add Pet Page -->
+                        <a href="{% url 'add_pet' %}">
+                            <i>Доза щастие</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+
+                        <!-- Link to Add Photo Page -->
+                        <a href="{% url 'add_photo' %}">
+                            <i>Помогни им</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+
+                        <!-- Link to Login Page -->
+                        <a href="{% url 'login_user' %}">
+                            <i>Осинови ме!</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+
+                        <!-- Link to Register Page -->
+                        <a href="{% url 'register_user' %}">
+                            <i>Ветеринари</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <br>
+            <div class="footer">
+                <span class="footer-section">
+                    Цитат на деня:
+                </span>
+            </div>
+
+            <form class="searchbar" method="get" action="{% url 'index' %}">
+                {#                <input type="text" placeholder="Search by pet name...">#}
+                {{ search_form }}
+                <button>
+                    <img src="{% static 'images/search.png' %}" height="18" alt="img2">
+                </button>
+                {% csrf_token %}
+            </form>
+            <!-- End Searchbar Form -->
+
+            <!-- Start Pet Photos Post Section -->
+            <!-- Start First Pet Photo Post -->
+            {% for photo in photos %}
+
+                {% include 'partials/photo-item.html' with photo=photo %}
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
